@@ -15,12 +15,14 @@ public class FormTest {
     @BeforeAll
     static void setUp() {
         Configuration.browserSize = "1920x1080";
+        Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
+        Configuration.holdBrowserOpen = true;
     }
 
     @Test
     void fillPracticeForm() {
-        open("https://demoqa.com/automation-practice-form");
+        open("/automation-practice-form");
 
         // Close ad/footer if present
         executeJavaScript("document.querySelector('#fixedban')?.remove()");
