@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
+import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
@@ -15,15 +16,13 @@ public class FormTest {
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
-        Configuration.holdBrowserOpen = true;
-        Configuration.timeout = 10000;
     }
 
     @Test
     void fillPracticeForm() {
         open("/automation-practice-form");
-        executeJavaScript("document.querySelector('#fixedban')?.remove()");
-        executeJavaScript("document.querySelector('footer')?.remove()");
+        executeJavaScript("$('footer').remove();");
+        executeJavaScript("$('#fixedban').remove();");
         $("#firstName").setValue("Vasiliy");
         $("#lastName").setValue("Melnikov");
         $("#userEmail").setValue("Vasyliy@gmail.com");
@@ -38,29 +37,30 @@ public class FormTest {
         $(byText("Sports")).click();
         $(byText("Reading")).click();
         $(byText("Music")).click();
-        File img = new File("src/test/java/resources/mycat.jpg");
-        $("#uploadPicture").uploadFile(img);
+        $("#uploadPicture").uploadFromClasspath("mycat.jpg");
         $("#currentAddress").setValue("123 Magistr Street, Apt 99, Tambov, RU");
-        $("#state").scrollIntoView(true).click();
+        $("#state").click();
         $(byText("NCR")).click();
         $("#city").click();
         $(byText("Delhi")).click();
-        $("#submit").scrollIntoView(true).click();
-        $(".modal-content").shouldHave(
-                text("Vasiliy Melnikov"),
-                text("Vasyliy@gmail.com"),
-                text("Male"),
-                text("9987654321"),
-                text("19 November,1993"),
-                text("Maths"),
-                text("Computer Science"),
-                text("Sports"),
-                text("Reading"),
-                text("Music"),
-                text("mycat.jpg"),
-                text("123 Magistr Street"),
-                text("NCR Delhi")
-        );
+        $("#submit").click();
+
+        $(".modal-content").should(appear);
+
+        $(".modal-content").shouldHave(text("Vasiliy Melnikov"));
+        $(".modal-content").shouldHave(text("Vasyliy@gmail.com"));
+        $(".modal-content").shouldHave(text("Male"));
+        $(".modal-content").shouldHave(text("9987654321"));
+        $(".modal-content").shouldHave(text("19 November,1993"));
+        $(".modal-content").shouldHave(text("Maths"));
+        $(".modal-content").shouldHave(text("Computer Science"));
+        $(".modal-content").shouldHave(text("Sports"));
+        $(".modal-content").shouldHave(text("Reading"));
+        $(".modal-content").shouldHave(text("Music"));
+        $(".modal-content").shouldHave(text("mycat.jpg"));
+        $(".modal-content").shouldHave(text("123 Magistr Street"));
+        $(".modal-content").shouldHave(text("NCR Delhi"));
+
         $("#closeLargeModal").click();
     }
 }
