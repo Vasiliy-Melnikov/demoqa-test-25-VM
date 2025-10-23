@@ -1,5 +1,3 @@
-package tests;
-
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -18,76 +16,51 @@ public class FormTest {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
         Configuration.holdBrowserOpen = true;
+        Configuration.timeout = 10000;
     }
 
     @Test
     void fillPracticeForm() {
         open("/automation-practice-form");
-
-        // Close ad/footer if present
         executeJavaScript("document.querySelector('#fixedban')?.remove()");
         executeJavaScript("document.querySelector('footer')?.remove()");
-
-        // 1. Text inputs
-        $("#firstName").setValue("Basil");
+        $("#firstName").setValue("Vasiliy");
         $("#lastName").setValue("Melnikov");
-        $("#userEmail").setValue("basil@example.com");
-
-        // 2. Gender (radio)
+        $("#userEmail").setValue("Vasyliy@gmail.com");
         $(byText("Male")).click();
-
-        // 3. Mobile
-        $("#userNumber").setValue("9123456789");
-
-        // 4. Date of Birth (use the datepicker)
+        $("#userNumber").setValue("9987654321");
         $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").selectOption("June");
-        $(".react-datepicker__year-select").selectOption("1995");
-        $(".react-datepicker__day--015:not(.react-datepicker__day--outside-month)").click(); // 15 June 1995
-
-        // 5. Subjects (autocomplete)
+        $(".react-datepicker__month-select").selectOption("November");
+        $(".react-datepicker__year-select").selectOption("1993");
+        $(".react-datepicker__day--019:not(.react-datepicker__day--outside-month)").click(); // 19 November 1993
         $("#subjectsInput").setValue("Maths").pressEnter();
         $("#subjectsInput").setValue("Computer Science").pressEnter();
-
-        // 6. Hobbies (checkboxes)
         $(byText("Sports")).click();
         $(byText("Reading")).click();
         $(byText("Music")).click();
-
-        // 7. Picture upload (from resources)
-        File img = new File("src/test/resources/avatar.png");
+        File img = new File("src/test/java/resources/mycat.jpg");
         $("#uploadPicture").uploadFile(img);
-
-        // 8. Current Address (textarea)
-        $("#currentAddress").setValue("123 Test Street, Apt 4, San Francisco, CA");
-
-        // 9. State and City (react-select)
+        $("#currentAddress").setValue("123 Magistr Street, Apt 99, Tambov, RU");
         $("#state").scrollIntoView(true).click();
         $(byText("NCR")).click();
         $("#city").click();
         $(byText("Delhi")).click();
-
-        // 10. Submit
         $("#submit").scrollIntoView(true).click();
-
-        // 11. Verify modal content
         $(".modal-content").shouldHave(
-                text("Basil Melnikov"),
-                text("basil@example.com"),
+                text("Vasiliy Melnikov"),
+                text("Vasyliy@gmail.com"),
                 text("Male"),
-                text("9123456789"),
-                text("15 June,1995"),
+                text("9987654321"),
+                text("19 November,1993"),
                 text("Maths"),
                 text("Computer Science"),
                 text("Sports"),
                 text("Reading"),
                 text("Music"),
-                text("avatar.png"),
-                text("123 Test Street"),
+                text("mycat.jpg"),
+                text("123 Magistr Street"),
                 text("NCR Delhi")
         );
-
-        // Close modal
         $("#closeLargeModal").click();
     }
 }
