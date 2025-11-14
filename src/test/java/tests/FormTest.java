@@ -57,7 +57,7 @@ public class FormTest {
 
     @Test
     void fillPracticeForm_minRequired() {
-        // Минимально обязательные поля: First Name, Last Name, Gender, Mobile
+
         form.openPage()
                 .removeAds()
                 .setFirstName("Vasiliy")
@@ -79,15 +79,14 @@ public class FormTest {
                 .removeAds()
                 .setFirstName("Vasiliy")
                 .setLastName("Melnikov")
-                .setEmail("not-an-email")       // невалидный email
+                .setEmail("not-an-email")
                 .selectGender("Male")
                 .setMobile("9987654321")
-                .submitExpectingValidation();    // ждем, что модалка НЕ появится
+                .submitExpectingValidation();
 
-        // модалка не должна появиться
+
         modal.shouldNotAppear();
 
-        // простая проверка, что email помечен как невалидный (bootstrap-красный)
         $("#userEmail").shouldHave(com.codeborne.selenide.Condition.cssValue("border-color", "rgb(220, 53, 69)"));
     }
 }

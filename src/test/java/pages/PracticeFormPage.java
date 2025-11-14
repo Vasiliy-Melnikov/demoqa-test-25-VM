@@ -59,8 +59,8 @@ public class PracticeFormPage {
 
     public PracticeFormPage selectHobby(String hobbyText) {
         SelenideElement hobby = $("#hobbiesWrapper").$(byText(hobbyText));
-        hobby.scrollIntoView(true);                         // подскроллили
-        executeJavaScript("arguments[0].click();", hobby);  // «жёсткий» клик
+        hobby.scrollIntoView(true);
+        executeJavaScript("arguments[0].click();", hobby);
         return this;
     }
 
@@ -90,6 +90,5 @@ public class PracticeFormPage {
 
     public void submitExpectingValidation() {
         $("#submit").click();
-        // намеренно ничего не ждём — валидная модалка не должна появиться
     }
 }

@@ -4,7 +4,6 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class ResultsModal {
-    // корень модалки
     private final String modal = ".modal-content";
 
     public ResultsModal shouldAppear() {
@@ -18,7 +17,6 @@ public class ResultsModal {
     }
 
     public ResultsModal shouldHaveRow(String key, String expectedValue) {
-        // ищем строку таблицы по названию поля (левый столбец)
         $$(".table-responsive tbody tr")
                 .findBy(text(key))
                 .shouldHave(text(expectedValue));
