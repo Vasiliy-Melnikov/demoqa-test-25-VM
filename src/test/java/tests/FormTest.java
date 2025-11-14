@@ -45,7 +45,6 @@ public class FormTest {
                 .shouldHaveRow("Student Email", "Vasyliy@gmail.com")
                 .shouldHaveRow("Gender", "Male")
                 .shouldHaveRow("Mobile", "9987654321")
-                // на demoqa дата рендерится без пробела после запятой
                 .shouldHaveRow("Date of Birth", "19 November,1993")
                 .shouldHaveRow("Subjects", "Maths, Computer Science")
                 .shouldHaveRow("Hobbies", "Sports, Reading, Music")
