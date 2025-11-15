@@ -1,49 +1,59 @@
 package pages;
 
+import com.codeborne.selenide.SelenideElement;
+import util.JsUtils;
+
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
 
 public class TextBoxPage {
+
+    private final SelenideElement fullNameInput       = $("#userName");
+    private final SelenideElement emailInput          = $("#userEmail");
+    private final SelenideElement currentAddressInput = $("#currentAddress");
+    private final SelenideElement permanentAddressInput = $("#permanentAddress");
+    private final SelenideElement submitButton        = $("#submit");
+    private final SelenideElement outputBlock         = $("#output");
+
     public TextBoxPage openPage() {
         open("/text-box");
         return this;
     }
 
-    public TextBoxPage removeAds() {
-        executeJavaScript("$('footer').remove();");
-        executeJavaScript("$('#fixedban').remove();");
+    public TextBoxPage removeAdsOnPage() {
+        JsUtils.removeAds();
         return this;
     }
 
     public TextBoxPage setFullName(String v) {
-        $("#userName").setValue(v);
+        fullNameInput.setValue(v);
         return this;
     }
 
     public TextBoxPage setEmail(String v) {
-        $("#userEmail").setValue(v);
+        emailInput.setValue(v);
         return this;
     }
 
     public TextBoxPage setCurrentAddress(String v) {
-        $("#currentAddress").setValue(v);
+        currentAddressInput.setValue(v);
         return this;
     }
 
     public TextBoxPage setPermanentAddress(String v) {
-        $("#permanentAddress").setValue(v);
+        permanentAddressInput.setValue(v);
         return this;
     }
 
     public TextBoxPage submit() {
-        $("#submit").click();
+        submitButton.click();
         return this;
     }
 
     public TextBoxPage shouldSeeResult(String... fragments) {
-        $("#output").shouldBe(visible);
+        outputBlock.shouldBe(visible);
         for (String f : fragments) {
-            $("#output").shouldHave(text(f));
+            outputBlock.shouldHave(text(f));
         }
         return this;
     }

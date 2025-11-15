@@ -4,25 +4,18 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import pages.PracticeFormPage;
-import components.ResultsModal;
+import pages.components.ResultsModal;
 
 import static com.codeborne.selenide.Selenide.$;
 
-public class FormTest {
+public class FormTest extends TestBase {
     private final PracticeFormPage form = new PracticeFormPage();
     private final ResultsModal modal = new ResultsModal();
-
-    @BeforeAll
-    static void setUp() {
-        Configuration.browserSize = "1920x1080";
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.pageLoadStrategy = "eager";
-    }
 
     @Test
     void fillPracticeForm_fullData() {
         form.openPage()
-                .removeAds()
+                .removeAdsOnPage()
                 .setFirstName("Vasiliy")
                 .setLastName("Melnikov")
                 .setEmail("Vasyliy@gmail.com")
@@ -58,7 +51,7 @@ public class FormTest {
     void fillPracticeForm_minRequired() {
 
         form.openPage()
-                .removeAds()
+                .removeAdsOnPage()
                 .setFirstName("Vasiliy")
                 .setLastName("Melnikov")
                 .selectGender("Male")
@@ -75,7 +68,7 @@ public class FormTest {
     @Test
     void fillPracticeForm_negative_invalidEmail() {
         form.openPage()
-                .removeAds()
+                .removeAdsOnPage()
                 .setFirstName("Vasiliy")
                 .setLastName("Melnikov")
                 .setEmail("not-an-email")

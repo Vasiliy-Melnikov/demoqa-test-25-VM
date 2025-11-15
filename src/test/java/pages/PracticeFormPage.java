@@ -1,49 +1,64 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
-import components.CalendarComponent;
-import components.StateCityComponent;
+import pages.components.CalendarComponent;
+import pages.components.StateCityComponent;
+import util.JsUtils;
 
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.open;
 
 public class PracticeFormPage {
+
     private final CalendarComponent calendar = new CalendarComponent();
     private final StateCityComponent stateCity = new StateCityComponent();
+
+    private final SelenideElement firstNameInput   = $("#firstName");
+    private final SelenideElement lastNameInput    = $("#lastName");
+    private final SelenideElement emailInput       = $("#userEmail");
+    private final SelenideElement genderWrapper    = $("#genterWrapper");
+    private final SelenideElement mobileInput      = $("#userNumber");
+    private final SelenideElement subjectsInput    = $("#subjectsInput");
+    private final SelenideElement hobbiesWrapper   = $("#hobbiesWrapper");
+    private final SelenideElement uploadPicture    = $("#uploadPicture");
+    private final SelenideElement addressTextArea  = $("#currentAddress");
+    private final SelenideElement stateDropdown    = $("#state");
+    private final SelenideElement cityDropdown     = $("#city");
+    private final SelenideElement submitButton     = $("#submit");
 
     public PracticeFormPage openPage() {
         open("/automation-practice-form");
         return this;
     }
 
-    public PracticeFormPage removeAds() {
-        executeJavaScript("$('footer').remove();");
-        executeJavaScript("$('#fixedban').remove();");
+    public PracticeFormPage removeAdsOnPage() {
+        JsUtils.removeAds();
         return this;
     }
 
     public PracticeFormPage setFirstName(String value) {
-        $("#firstName").setValue(value);
+        firstNameInput.setValue(value);
         return this;
     }
 
     public PracticeFormPage setLastName(String value) {
-        $("#lastName").setValue(value);
+        lastNameInput.setValue(value);
         return this;
     }
 
     public PracticeFormPage setEmail(String value) {
-        $("#userEmail").setValue(value);
+        emailInput.setValue(value);
         return this;
     }
 
     public PracticeFormPage selectGender(String genderText) {
-        $("#genterWrapper").$(byText(genderText)).click();
+        genderWrapper.$(byText(genderText)).click();
         return this;
     }
 
     public PracticeFormPage setMobile(String value) {
-        $("#userNumber").setValue(value);
+        mobileInput.setValue(value);
         return this;
     }
 
@@ -53,24 +68,22 @@ public class PracticeFormPage {
     }
 
     public PracticeFormPage addSubject(String subject) {
-        $("#subjectsInput").setValue(subject).pressEnter();
+        subjectsInput.setValue(subject).pressEnter();
         return this;
     }
 
     public PracticeFormPage selectHobby(String hobbyText) {
-        SelenideElement hobby = $("#hobbiesWrapper").$(byText(hobbyText));
-        hobby.scrollIntoView(true);
-        executeJavaScript("arguments[0].click();", hobby);
+        hobbiesWrapper.$(byText(hobbyText)).click();
         return this;
     }
 
     public PracticeFormPage uploadPictureFromClasspath(String filename) {
-        $("#uploadPicture").uploadFromClasspath(filename);
+        uploadPicture.uploadFromClasspath(filename);
         return this;
     }
 
     public PracticeFormPage setAddress(String value) {
-        $("#currentAddress").setValue(value);
+        addressTextArea.setValue(value);
         return this;
     }
 
@@ -85,10 +98,10 @@ public class PracticeFormPage {
     }
 
     public void submit() {
-        $("#submit").click();
+        submitButton.click();
     }
 
     public void submitExpectingValidation() {
-        $("#submit").click();
+        submitButton.click();
     }
 }
