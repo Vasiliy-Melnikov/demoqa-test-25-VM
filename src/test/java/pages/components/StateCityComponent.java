@@ -7,9 +7,9 @@ import static com.codeborne.selenide.Selectors.byText;
 
 public class StateCityComponent {
 
-    private final SelenideElement stateDropdown = $("#state");
-    private final SelenideElement cityDropdown  = $("#city");
-    private final SelenideElement stateCityWrapper = $("#stateCity-wrapper");
+    private final SelenideElement stateDropdown     = $("#state");
+    private final SelenideElement cityDropdown      = $("#city");
+    private final SelenideElement stateCityWrapper  = $("#stateCity-wrapper");
 
     public void selectState(String state) {
         stateDropdown.click();
