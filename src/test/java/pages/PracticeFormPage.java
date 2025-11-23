@@ -6,9 +6,8 @@ import pages.components.CalendarComponent;
 import pages.components.StateCityComponent;
 import util.JsUtils;
 
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class PracticeFormPage {
 
@@ -74,9 +73,9 @@ public class PracticeFormPage {
     }
 
     public PracticeFormPage selectHobby(String hobbyText) {
-        hobbiesWrapper.$(byText(hobbyText))
-                .scrollTo()
-                .click(ClickOptions.usingJavaScript());
+        SelenideElement hobby = hobbiesWrapper.$(byText(hobbyText));
+        hobby.scrollTo();
+        executeJavaScript("arguments[0].click();", hobby);
         return this;
     }
 
