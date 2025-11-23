@@ -22,8 +22,6 @@ public class PracticeFormPage {
     private final SelenideElement hobbiesWrapper   = $("#hobbiesWrapper");
     private final SelenideElement uploadPicture    = $("#uploadPicture");
     private final SelenideElement addressTextArea  = $("#currentAddress");
-    private final SelenideElement stateDropdown    = $("#state");
-    private final SelenideElement cityDropdown     = $("#city");
     private final SelenideElement submitButton     = $("#submit");
 
     public PracticeFormPage openPage() {
