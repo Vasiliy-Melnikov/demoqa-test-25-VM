@@ -1,5 +1,6 @@
 package pages;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
 import pages.components.StateCityComponent;
@@ -73,7 +74,9 @@ public class PracticeFormPage {
     }
 
     public PracticeFormPage selectHobby(String hobbyText) {
-        hobbiesWrapper.$(byText(hobbyText)).click();
+        hobbiesWrapper.$(byText(hobbyText))
+                .scrollTo()
+                .click(ClickOptions.usingJavaScript());
         return this;
     }
 
