@@ -13,16 +13,16 @@ public class PracticeFormPage {
     private final CalendarComponent calendar = new CalendarComponent();
     private final StateCityComponent stateCity = new StateCityComponent();
 
-    private final SelenideElement firstNameInput   = $("#firstName");
-    private final SelenideElement lastNameInput    = $("#lastName");
-    private final SelenideElement emailInput       = $("#userEmail");
-    private final SelenideElement genderWrapper    = $("#genterWrapper");
-    private final SelenideElement mobileInput      = $("#userNumber");
-    private final SelenideElement subjectsInput    = $("#subjectsInput");
-    private final SelenideElement hobbiesWrapper   = $("#hobbiesWrapper");
-    private final SelenideElement uploadPicture    = $("#uploadPicture");
-    private final SelenideElement addressTextArea  = $("#currentAddress");
-    private final SelenideElement submitButton     = $("#submit");
+    private final SelenideElement firstNameInput = $("#firstName");
+    private final SelenideElement lastNameInput = $("#lastName");
+    private final SelenideElement emailInput = $("#userEmail");
+    private final SelenideElement genderWrapper = $("#genterWrapper");
+    private final SelenideElement mobileInput = $("#userNumber");
+    private final SelenideElement subjectsInput = $("#subjectsInput");
+    private final SelenideElement hobbiesWrapper = $("#hobbiesWrapper");
+    private final SelenideElement uploadPicture = $("#uploadPicture");
+    private final SelenideElement addressTextArea = $("#currentAddress");
+    private final SelenideElement submitButton = $("#submit");
 
     public PracticeFormPage openPage() {
         open("/automation-practice-form");

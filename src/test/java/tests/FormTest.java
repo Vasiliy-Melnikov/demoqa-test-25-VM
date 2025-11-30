@@ -1,7 +1,5 @@
 package tests;
 
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import pages.PracticeFormPage;
 import pages.components.ResultsModal;
@@ -13,7 +11,7 @@ public class FormTest extends TestBase {
     private final ResultsModal modal = new ResultsModal();
 
     @Test
-    void fillPracticeForm_fullData() {
+    void fillPracticeFormTest() {
         form.openPage()
                 .removeAdsOnPage()
                 .setFirstName("Vasiliy")
@@ -48,7 +46,7 @@ public class FormTest extends TestBase {
     }
 
     @Test
-    void fillPracticeForm_minRequired() {
+    void fillPracticeFormMinRequired() {
 
         form.openPage()
                 .removeAdsOnPage()
@@ -66,7 +64,7 @@ public class FormTest extends TestBase {
     }
 
     @Test
-    void fillPracticeForm_negative_invalidEmail() {
+    void fillPracticeFormNegativeInvalidEmail() {
         form.openPage()
                 .removeAdsOnPage()
                 .setFirstName("Vasiliy")

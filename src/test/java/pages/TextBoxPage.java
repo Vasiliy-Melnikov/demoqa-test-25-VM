@@ -8,12 +8,12 @@ import static com.codeborne.selenide.Condition.*;
 
 public class TextBoxPage {
 
-    private final SelenideElement fullNameInput       = $("#userName");
-    private final SelenideElement emailInput          = $("#userEmail");
+    private final SelenideElement fullNameInput = $("#userName");
+    private final SelenideElement emailInput = $("#userEmail");
     private final SelenideElement currentAddressInput = $("#currentAddress");
     private final SelenideElement permanentAddressInput = $("#permanentAddress");
-    private final SelenideElement submitButton        = $("#submit");
-    private final SelenideElement outputBlock         = $("#output");
+    private final SelenideElement submitButton = $("#submit");
+    private final SelenideElement outputBlock = $("#output");
 
     public TextBoxPage openPage() {
         open("/text-box");

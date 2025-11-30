@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class ResultsModal {
 
-    private final SelenideElement modal      = $(".modal-content");
+    private final SelenideElement modal = $(".modal-content");
     private final SelenideElement closeButton = $("#closeLargeModal");
     private final ElementsCollection resultRows = $$(".table-responsive tbody tr");
 
