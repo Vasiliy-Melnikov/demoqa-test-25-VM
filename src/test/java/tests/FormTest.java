@@ -12,66 +12,105 @@ public class FormTest extends TestBase {
 
     @Test
     void fillPracticeFormTest() {
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        String fullName = firstName + " " + lastName;
+
+        String email = faker.internet().emailAddress();
+        String gender = "Male";
+        String mobile = faker.phoneNumber().subscriberNumber(10);
+
+        String birthMonth = "November";
+        String birthYear = "1993";
+        String birthDay = "19";
+        String expectedDateOfBirth = birthDay + " " + birthMonth + "," + birthYear;
+
+        String subject1 = "Maths";
+        String subject2 = "Computer Science";
+        String expectedSubjects = subject1 + ", " + subject2;
+
+        String hobby1 = "Sports";
+        String hobby2 = "Reading";
+        String hobby3 = "Music";
+        String expectedHobbies = hobby1 + ", " + hobby2 + ", " + hobby3;
+
+        String picture = "mycat.jpg";
+        String address = faker.address().fullAddress();
+        String state = "NCR";
+        String city = "Delhi";
+        String expectedStateAndCity = state + " " + city;
         form.openPage()
                 .removeAdsOnPage()
-                .setFirstName("Vasiliy")
-                .setLastName("Melnikov")
-                .setEmail("Vasyliy@gmail.com")
-                .selectGender("Male")
-                .setMobile("9987654321")
-                .setBirthDate("November", "1993", "19")
-                .addSubject("Maths")
-                .addSubject("Computer Science")
-                .selectHobby("Sports")
-                .selectHobby("Reading")
-                .selectHobby("Music")
-                .uploadPictureFromClasspath("mycat.jpg")
-                .setAddress("123 Magistr Street, Apt 99, Tambov, RU")
-                .selectState("NCR")
-                .selectCity("Delhi")
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setEmail(email)
+                .selectGender(gender)
+                .setMobile(mobile)
+                .setBirthDate(birthMonth, birthYear, birthDay)
+                .addSubject(subject1)
+                .addSubject(subject2)
+                .selectHobby(hobby1)
+                .selectHobby(hobby2)
+                .selectHobby(hobby3)
+                .uploadPictureFromClasspath(picture)
+                .setAddress(address)
+                .selectState(state)
+                .selectCity(city)
                 .submit();
 
         modal.shouldAppear()
-                .shouldHaveRow("Student Name", "Vasiliy Melnikov")
-                .shouldHaveRow("Student Email", "Vasyliy@gmail.com")
-                .shouldHaveRow("Gender", "Male")
-                .shouldHaveRow("Mobile", "9987654321")
-                .shouldHaveRow("Date of Birth", "19 November,1993")
-                .shouldHaveRow("Subjects", "Maths, Computer Science")
-                .shouldHaveRow("Hobbies", "Sports, Reading, Music")
-                .shouldHaveRow("Picture", "mycat.jpg")
-                .shouldHaveRow("Address", "123 Magistr Street, Apt 99, Tambov, RU")
-                .shouldHaveRow("State and City", "NCR Delhi")
+                .shouldHaveRow("Student Name", fullName)
+                .shouldHaveRow("Student Email", email)
+                .shouldHaveRow("Gender", gender)
+                .shouldHaveRow("Mobile", mobile)
+                .shouldHaveRow("Date of Birth", expectedDateOfBirth)
+                .shouldHaveRow("Subjects", expectedSubjects)
+                .shouldHaveRow("Hobbies", expectedHobbies)
+                .shouldHaveRow("Picture", picture)
+                .shouldHaveRow("Address", address)
+                .shouldHaveRow("State and City", expectedStateAndCity)
                 .close();
     }
 
     @Test
     void fillPracticeFormMinRequired() {
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        String fullName = firstName + " " + lastName;
+
+        String gender = "Male";
+        String mobile = faker.phoneNumber().subscriberNumber(10);
 
         form.openPage()
                 .removeAdsOnPage()
-                .setFirstName("Vasiliy")
-                .setLastName("Melnikov")
-                .selectGender("Male")
-                .setMobile("9987654321")
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .selectGender(gender)
+                .setMobile(mobile)
                 .submit();
 
         modal.shouldAppear()
-                .shouldHaveRow("Student Name", "Vasiliy Melnikov")
-                .shouldHaveRow("Gender", "Male")
-                .shouldHaveRow("Mobile", "9987654321")
+                .shouldHaveRow("Student Name", fullName)
+                .shouldHaveRow("Gender", gender)
+                .shouldHaveRow("Mobile", mobile)
                 .close();
     }
 
     @Test
     void fillPracticeFormNegativeInvalidEmail() {
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        String gender = "Male";
+        String mobile = faker.phoneNumber().subscriberNumber(10);
+        String invalidEmail = "not-an-email";
+
         form.openPage()
                 .removeAdsOnPage()
-                .setFirstName("Vasiliy")
-                .setLastName("Melnikov")
-                .setEmail("not-an-email")
-                .selectGender("Male")
-                .setMobile("9987654321")
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setEmail(invalidEmail)
+                .selectGender(gender)
+                .setMobile(mobile)
                 .submitExpectingValidation();
 
 
