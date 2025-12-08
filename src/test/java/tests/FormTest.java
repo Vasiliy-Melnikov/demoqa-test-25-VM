@@ -4,118 +4,83 @@ import org.junit.jupiter.api.Test;
 import pages.PracticeFormPage;
 import pages.components.ResultsModal;
 
-import static com.codeborne.selenide.Selenide.$;
-
 public class FormTest extends TestBase {
+
     private final PracticeFormPage form = new PracticeFormPage();
     private final ResultsModal modal = new ResultsModal();
+    private final TestData data = new TestData();
 
     @Test
     void fillPracticeFormTest() {
-        String firstName = faker.name().firstName();
-        String lastName = faker.name().lastName();
-        String fullName = firstName + " " + lastName;
 
-        String email = faker.internet().emailAddress();
-        String gender = "Male";
-        String mobile = faker.phoneNumber().subscriberNumber(10);
-
-        String birthMonth = "November";
-        String birthYear = "1993";
-        String birthDay = "19";
-        String expectedDateOfBirth = birthDay + " " + birthMonth + "," + birthYear;
-
-        String subject1 = "Maths";
-        String subject2 = "Computer Science";
-        String expectedSubjects = subject1 + ", " + subject2;
-
-        String hobby1 = "Sports";
-        String hobby2 = "Reading";
-        String hobby3 = "Music";
-        String expectedHobbies = hobby1 + ", " + hobby2 + ", " + hobby3;
-
-        String picture = "mycat.jpg";
-        String address = faker.address().fullAddress();
-        String state = "NCR";
-        String city = "Delhi";
-        String expectedStateAndCity = state + " " + city;
         form.openPage()
                 .removeAdsOnPage()
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setEmail(email)
-                .selectGender(gender)
-                .setMobile(mobile)
-                .setBirthDate(birthMonth, birthYear, birthDay)
-                .addSubject(subject1)
-                .addSubject(subject2)
-                .selectHobby(hobby1)
-                .selectHobby(hobby2)
-                .selectHobby(hobby3)
-                .uploadPictureFromClasspath(picture)
-                .setAddress(address)
-                .selectState(state)
-                .selectCity(city)
+                .setFirstName(data.firstName)
+                .setLastName(data.lastName)
+                .setEmail(data.email)
+                .selectGender(data.gender)
+                .setMobile(data.mobile)
+                .setBirthDate(data.birthMonth, data.birthYear, data.birthDay)
+                .addSubject(data.subject1)
+                .addSubject(data.subject2)
+                .selectHobby(data.hobby1)
+                .selectHobby(data.hobby2)
+                .selectHobby(data.hobby3)
+                .uploadPictureFromClasspath(data.picture)
+                .setAddress(data.currentAddress)
+                .selectState(data.state)
+                .selectCity(data.city)
                 .submit();
 
         modal.shouldAppear()
-                .shouldHaveRow("Student Name", fullName)
-                .shouldHaveRow("Student Email", email)
-                .shouldHaveRow("Gender", gender)
-                .shouldHaveRow("Mobile", mobile)
-                .shouldHaveRow("Date of Birth", expectedDateOfBirth)
-                .shouldHaveRow("Subjects", expectedSubjects)
-                .shouldHaveRow("Hobbies", expectedHobbies)
-                .shouldHaveRow("Picture", picture)
-                .shouldHaveRow("Address", address)
-                .shouldHaveRow("State and City", expectedStateAndCity)
+                .shouldHaveRow("Student Name", data.fullName)
+                .shouldHaveRow("Student Email", data.email)
+                .shouldHaveRow("Gender", data.gender)
+                .shouldHaveRow("Mobile", data.mobile)
+                .shouldHaveRow("Date of Birth", data.expectedDateOfBirth)
+                .shouldHaveRow("Subjects", data.expectedSubjects)
+                .shouldHaveRow("Hobbies", data.expectedHobbies)
+                .shouldHaveRow("Picture", data.picture)
+                .shouldHaveRow("Address", data.currentAddress)
+                .shouldHaveRow("State and City", data.expectedStateAndCity)
                 .close();
     }
 
     @Test
     void fillPracticeFormMinRequired() {
-        String firstName = faker.name().firstName();
-        String lastName = faker.name().lastName();
-        String fullName = firstName + " " + lastName;
-
-        String gender = "Male";
-        String mobile = faker.phoneNumber().subscriberNumber(10);
 
         form.openPage()
                 .removeAdsOnPage()
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .selectGender(gender)
-                .setMobile(mobile)
+                .setFirstName(data.firstName)
+                .setLastName(data.lastName)
+                .selectGender(data.gender)
+                .setMobile(data.mobile)
                 .submit();
 
         modal.shouldAppear()
-                .shouldHaveRow("Student Name", fullName)
-                .shouldHaveRow("Gender", gender)
-                .shouldHaveRow("Mobile", mobile)
+                .shouldHaveRow("Student Name", data.fullName)
+                .shouldHaveRow("Gender", data.gender)
+                .shouldHaveRow("Mobile", data.mobile)
                 .close();
     }
 
     @Test
     void fillPracticeFormNegativeInvalidEmail() {
-        String firstName = faker.name().firstName();
-        String lastName = faker.name().lastName();
-        String gender = "Male";
-        String mobile = faker.phoneNumber().subscriberNumber(10);
+
         String invalidEmail = "not-an-email";
 
         form.openPage()
                 .removeAdsOnPage()
-                .setFirstName(firstName)
-                .setLastName(lastName)
+                .setFirstName(data.firstName)
+                .setLastName(data.lastName)
                 .setEmail(invalidEmail)
-                .selectGender(gender)
-                .setMobile(mobile)
+                .selectGender(data.gender)
+                .setMobile(data.mobile)
                 .submitExpectingValidation();
-
 
         modal.shouldNotAppear();
 
-        $("#userEmail").shouldHave(com.codeborne.selenide.Condition.cssValue("border-color", "rgb(220, 53, 69)"));
+        com.codeborne.selenide.Selenide.$("#userEmail")
+                .shouldHave(com.codeborne.selenide.Condition.cssValue("border-color", "rgb(220, 53, 69)"));
     }
 }
