@@ -12,7 +12,6 @@ public class PracticeFormPage {
 
     private final CalendarComponent calendar = new CalendarComponent();
     private final StateCityComponent stateCity = new StateCityComponent();
-
     private final SelenideElement firstNameInput = $("#firstName");
     private final SelenideElement lastNameInput = $("#lastName");
     private final SelenideElement emailInput = $("#userEmail");
@@ -60,7 +59,9 @@ public class PracticeFormPage {
     }
 
     public PracticeFormPage setBirthDate(String month, String year, String day) {
+        $("#dateOfBirthInput").click();
         calendar.setDate(month, year, day);
+        $("#subjectsInput").click();
         return this;
     }
 

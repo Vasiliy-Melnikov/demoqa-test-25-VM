@@ -33,8 +33,8 @@ public class FormTest extends TestBase {
                 .submit();
 
         modal.shouldAppear()
-                .shouldHaveRow("Student Name", data.fullName)
-                .shouldHaveRow("Student Email", data.email)
+                .shouldHaveRow("Name", data.fullName)
+                .shouldHaveRow("Email", data.email)
                 .shouldHaveRow("Gender", data.gender)
                 .shouldHaveRow("Mobile", data.mobile)
                 .shouldHaveRow("Date of Birth", data.expectedDateOfBirth)
@@ -58,7 +58,7 @@ public class FormTest extends TestBase {
                 .submit();
 
         modal.shouldAppear()
-                .shouldHaveRow("Student Name", data.fullName)
+                .shouldHaveRow("Name", data.fullName)
                 .shouldHaveRow("Gender", data.gender)
                 .shouldHaveRow("Mobile", data.mobile)
                 .close();
