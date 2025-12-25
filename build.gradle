@@ -1,5 +1,6 @@
 plugins {
-    id 'java-library'
+    id 'java'
+    id 'io.qameta.allure' version '2.11.2'
 }
 
 repositories {
@@ -7,16 +8,24 @@ repositories {
 }
 
 dependencies {
-    testImplementation(
-            "com.codeborne:selenide:6.19.1",
-            "org.junit.jupiter:junit-jupiter:5.10.0",
-            "org.slf4j:slf4j-simple:2.0.7",
+    testImplementation (
+            "com.codeborne:selenide:7.5.1",
+            "org.junit.jupiter:junit-jupiter:5.10.2",
+            "io.qameta.allure:allure-junit5:2.27.0",
             "org.assertj:assertj-core:3.25.3",
-            "com.github.javafaker:javafaker:1.0.2"
+            "com.github.javafaker:javafaker:1.0.2",
+            "io.qameta.allure:allure-selenide:2.27.0"
     )
 }
 
 test {
     useJUnitPlatform()
     systemProperty("file.encoding", "UTF-8")
+}
+
+allure {
+    version = '2.27.0'
+    useJUnit5 {
+        version = '2.27.0'
+    }
 }
