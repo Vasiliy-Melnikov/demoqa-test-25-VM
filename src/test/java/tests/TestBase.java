@@ -19,15 +19,17 @@ public class TestBase {
         Configuration.browserVersion = System.getProperty("browserVersion", "127.0");
         Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
 
-        String remoteDriverUrl = System.getProperty("remoteDriverUrl");
-        if (remoteDriverUrl != null && !remoteDriverUrl.isEmpty()) {
-            Configuration.remote = remoteDriverUrl;
+        String remoteDriverUrl = System.getProperty(
+                "remoteDriverUrl",
+                "https://user1:1234@selenoid.autotests.cloud/wd/hub"
+        );
+        Configuration.remote = remoteDriverUrl;
 
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setCapability("enableVNC", true);
-            capabilities.setCapability("enableVideo", true);
-            Configuration.browserCapabilities = capabilities;
-        }
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("enableVNC", true);
+        capabilities.setCapability("enableVideo", true);
+        Configuration.browserCapabilities = capabilities;
+    }
     }
 
     @BeforeEach
