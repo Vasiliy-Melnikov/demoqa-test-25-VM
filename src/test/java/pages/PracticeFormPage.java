@@ -90,10 +90,13 @@ public class PracticeFormPage {
     public PracticeFormPage selectState(String state) {
         $("#state").scrollIntoView(true);
         JsUtils.removeAds();
+        executeJavaScript(
+                "var dp = document.querySelector('.react-datepicker'); if (dp) dp.remove();"
+        );
+
         stateCity.selectState(state);
         return this;
     }
-
     public PracticeFormPage selectCity(String city) {
         stateCity.selectCity(city);
         return this;
