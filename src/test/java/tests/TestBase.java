@@ -9,6 +9,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class TestBase {
 
     @BeforeAll
@@ -31,8 +34,10 @@ public class TestBase {
         Configuration.remote = remoteDriverUrl;
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", true);
+        Map<String, Object> selenoidOptions = new HashMap<>();
+        selenoidOptions.put("enableVNC", true);
+        selenoidOptions.put("enableVideo", true);
+        capabilities.setCapability("selenoid:options", selenoidOptions);
         Configuration.browserCapabilities = capabilities;
     }
 
