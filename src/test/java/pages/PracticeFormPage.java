@@ -88,6 +88,8 @@ public class PracticeFormPage {
     }
 
     public PracticeFormPage selectState(String state) {
+        $("#state").scrollIntoView(true);
+        JsUtils.removeAds();
         stateCity.selectState(state);
         return this;
     }
@@ -98,6 +100,8 @@ public class PracticeFormPage {
     }
 
     public void submit() {
+        submitButton.scrollIntoView(true);
+        JsUtils.removeAds();
         submitButton.click();
     }
 
