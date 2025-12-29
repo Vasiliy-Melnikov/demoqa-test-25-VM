@@ -24,7 +24,7 @@ public class TestBase {
         Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
 
         String remoteUrl = System.getProperty(
-                "remoteUrl",
+                "remoteDriverUrl", // <-- читаем то, что передаём из Jenkins
                 "https://user1:1234@selenoid.autotests.cloud/wd/hub"
         );
 
