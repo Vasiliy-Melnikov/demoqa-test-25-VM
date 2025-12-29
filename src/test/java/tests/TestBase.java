@@ -10,6 +10,9 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Map;
 
+import static com.codeborne.selenide.Selenide.sessionId;
+import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
+
 public class TestBase {
 
     @BeforeAll
@@ -30,9 +33,11 @@ public class TestBase {
 
     @AfterEach
     void addAttachments() {
+        String sId = sessionId().toString();
         Attach.screenshotAs("Last screenshot");
         Attach.pageSource();
         Attach.browserConsoleLogs();
-        Attach.addVideo();
+        closeWebDriver();
+        Attach.addVideo(sId);
     }
 }
