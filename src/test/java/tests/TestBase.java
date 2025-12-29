@@ -28,6 +28,13 @@ public class TestBase {
                 "https://user1:1234@selenoid.autotests.cloud/wd/hub"
         );
 
+        System.out.println("=== RUN CONFIG ===");
+        System.out.println("browser = " + Configuration.browser);
+        System.out.println("browserVersion = " + Configuration.browserVersion);
+        System.out.println("browserSize = " + Configuration.browserSize);
+        System.out.println("remote = " + remoteUrl);
+        System.out.println("==================");
+
         if (remoteUrl != null && !remoteUrl.isEmpty()) {
             Configuration.remote = remoteUrl;
 
