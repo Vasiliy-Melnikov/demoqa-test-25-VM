@@ -5,10 +5,19 @@ import static com.codeborne.selenide.Selenide.executeJavaScript;
 public class JsUtils {
 
     public static void removeAds() {
-        executeJavaScript("$('footer').remove();");
-        executeJavaScript("$('#fixedban').remove();");
         executeJavaScript(
-                "document.querySelectorAll('iframe[id^=\"google_ads_iframe\"]').forEach(e => e.remove());"
+                "document.querySelectorAll('footer, #fixedban').forEach(e => e.remove());"
+        );
+
+        executeJavaScript(
+                "document.querySelectorAll('iframe[id^=\"google_ads_iframe\"]').forEach(function(iframe) {" +
+                        "  var container = iframe.closest('table, div, ins');" +
+                        "  if (container) {" +
+                        "    container.remove();" +
+                        "  } else {" +
+                        "    iframe.remove();" +
+                        "  }" +
+                        "});"
         );
     }
 }
