@@ -17,16 +17,27 @@ public class TestBase {
 
     @BeforeAll
     static void beforeAll() {
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "1920x1080";
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
 
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                "enableVNC", true,
-                "enableVideo", true
-        ));
-        Configuration.browserCapabilities = capabilities;
+        Configuration.baseUrl = "https://demoqa.com";
+        Configuration.browser = System.getProperty("browser", "chrome");
+        Configuration.browserVersion = System.getProperty("browserVersion", "131.0");
+        Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
+
+        String remoteUrl = System.getProperty(
+                "remoteUrl",
+                "https://user1:1234@selenoid.autotests.cloud/wd/hub"
+        );
+
+        if (remoteUrl != null && !remoteUrl.isEmpty()) {
+            Configuration.remote = remoteUrl;
+
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                    "enableVNC", true,
+                    "enableVideo", true
+            ));
+            Configuration.browserCapabilities = capabilities;
+        }
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }
