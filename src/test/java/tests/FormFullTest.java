@@ -4,15 +4,14 @@ import org.junit.jupiter.api.Test;
 import pages.PracticeFormPage;
 import pages.components.ResultsModal;
 
-public class FormTest extends TestBase {
+public class FormFullTest extends TestBase {
 
     private final PracticeFormPage form = new PracticeFormPage();
     private final ResultsModal modal = new ResultsModal();
     private final TestData data = new TestData();
 
     @Test
-    void fillPracticeFormTest() {
-
+    void fillPracticeFormFull() {
         form.openPage()
                 .removeAdsOnPage()
                 .setFirstName(data.firstName)
@@ -44,43 +43,5 @@ public class FormTest extends TestBase {
                 .shouldHaveRow("Address", data.currentAddress)
                 .shouldHaveRow("State and City", data.expectedStateAndCity)
                 .close();
-    }
-
-    @Test
-    void fillPracticeFormMinRequired() {
-
-        form.openPage()
-                .removeAdsOnPage()
-                .setFirstName(data.firstName)
-                .setLastName(data.lastName)
-                .selectGender(data.gender)
-                .setMobile(data.mobile)
-                .submit();
-
-        modal.shouldAppear()
-                .shouldHaveRow("Name", data.fullName)
-                .shouldHaveRow("Gender", data.gender)
-                .shouldHaveRow("Mobile", data.mobile)
-                .close();
-    }
-
-    @Test
-    void fillPracticeFormNegativeInvalidEmail() {
-
-        String invalidEmail = "not-an-email";
-
-        form.openPage()
-                .removeAdsOnPage()
-                .setFirstName(data.firstName)
-                .setLastName(data.lastName)
-                .setEmail(invalidEmail)
-                .selectGender(data.gender)
-                .setMobile(data.mobile)
-                .submitExpectingValidation();
-
-        modal.shouldNotAppear();
-
-        com.codeborne.selenide.Selenide.$("#userEmail")
-                .shouldHave(com.codeborne.selenide.Condition.cssValue("border-color", "rgb(220, 53, 69)"));
     }
 }
