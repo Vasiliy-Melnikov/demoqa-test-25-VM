@@ -108,6 +108,7 @@ public class PracticeFormPage {
     }
 
     public void submitExpectingValidation() {
-        submitButton.click();
+        submitButton.scrollTo();
+        executeJavaScript("arguments[0].click();", submitButton);
     }
 }

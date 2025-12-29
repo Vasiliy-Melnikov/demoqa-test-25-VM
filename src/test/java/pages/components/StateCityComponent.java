@@ -3,6 +3,7 @@ package pages.components;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Condition.visible;
 
@@ -15,16 +16,14 @@ public class StateCityComponent {
     public void selectState(String state) {
         stateDropdown.scrollIntoView(true);
         stateDropdown.click();
-        stateCityWrapper.$(byText(state))
-                .shouldBe(visible)
-                .click();
+        SelenideElement option = stateCityWrapper.$(byText(state)).shouldBe(visible);
+        executeJavaScript("arguments[0].click();", option);
     }
 
     public void selectCity(String city) {
         cityDropdown.scrollIntoView(true);
         cityDropdown.click();
-        stateCityWrapper.$(byText(city))
-                .shouldBe(visible)
-                .click();
+        SelenideElement option = stateCityWrapper.$(byText(city)).shouldBe(visible);
+        executeJavaScript("arguments[0].click();", option);
     }
 }

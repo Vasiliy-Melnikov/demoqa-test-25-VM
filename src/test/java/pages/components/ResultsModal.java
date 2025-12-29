@@ -2,13 +2,13 @@ package pages.components;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import util.JsUtils;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.*;
 
 public class ResultsModal {
 
@@ -34,7 +34,9 @@ public class ResultsModal {
     }
 
     public void close() {
-        closeButton.click();
+        JsUtils.removeAds(); // на всякий случай чистим баннеры
+        closeButton.scrollIntoView(true);
+        executeJavaScript("arguments[0].click();", closeButton);
         modal.shouldNot(appear, Duration.ofSeconds(5));
     }
 }
