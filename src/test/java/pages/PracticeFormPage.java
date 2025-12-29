@@ -103,9 +103,8 @@ public class PracticeFormPage {
     }
 
     public void submit() {
-        submitButton.scrollIntoView(true);
-        JsUtils.removeAds();
-        submitButton.click();
+        submitButton.scrollTo();
+        executeJavaScript("arguments[0].click();", submitButton);
     }
 
     public void submitExpectingValidation() {

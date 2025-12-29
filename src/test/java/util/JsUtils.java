@@ -5,10 +5,7 @@ import static com.codeborne.selenide.Selenide.executeJavaScript;
 public class JsUtils {
 
     public static void removeAds() {
-        executeJavaScript("var f = document.querySelector('footer'); if (f) f.remove();");
-        executeJavaScript("var b = document.querySelector('#fixedban'); if (b) b.remove();");
-        executeJavaScript(
-                "document.querySelectorAll('iframe').forEach(function(el){ el.remove(); });"
-        );
+        executeJavaScript("$('footer').remove();");
+        executeJavaScript("$('#fixedban').remove();");
+        executeJavaScript("document.querySelectorAll('iframe[id^=\"google_ads_iframe\"]').forEach(e => e.remove());");
     }
-}
