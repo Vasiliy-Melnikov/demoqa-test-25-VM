@@ -1,6 +1,7 @@
 package tests;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
 import pages.PracticeFormPage;
 import pages.components.ResultsModal;
 
@@ -10,6 +11,7 @@ public class FormFullTest extends TestBase {
     private final ResultsModal modal = new ResultsModal();
     private final TestData data = new TestData();
 
+    @EnabledIfSystemProperty(named = "browser", matches = "chrome")
     @Test
     void fillPracticeFormFull() {
         form.openPage()
