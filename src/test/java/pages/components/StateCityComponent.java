@@ -4,6 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Condition.*;
 
 public class StateCityComponent {
 
@@ -17,13 +18,17 @@ public class StateCityComponent {
         stateDropdown.scrollIntoView(true);
         executeJavaScript("arguments[0].click();", stateDropdown);
 
+        stateInput.shouldBe(visible, enabled);
         stateInput.setValue(state);
         stateInput.pressEnter();
     }
 
     public void selectCity(String city) {
         cityDropdown.scrollIntoView(true);
+        cityDropdown.shouldBe(enabled);
         executeJavaScript("arguments[0].click();", cityDropdown);
+        cityInput.shouldBe(visible);
+        cityInput.shouldNotHave(attribute("disabled"));
 
         cityInput.setValue(city);
         cityInput.pressEnter();
