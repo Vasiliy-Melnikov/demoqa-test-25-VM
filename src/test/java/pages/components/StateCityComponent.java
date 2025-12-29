@@ -15,15 +15,19 @@ public class StateCityComponent {
 
     public void selectState(String state) {
         stateDropdown.scrollIntoView(true);
-        stateDropdown.click();
-        SelenideElement option = stateCityWrapper.$(byText(state)).shouldBe(visible);
+        executeJavaScript("arguments[0].click();", stateDropdown);
+
+        SelenideElement option = stateCityWrapper.$(byText(state))
+                .shouldBe(visible);
         executeJavaScript("arguments[0].click();", option);
     }
 
     public void selectCity(String city) {
         cityDropdown.scrollIntoView(true);
-        cityDropdown.click();
-        SelenideElement option = stateCityWrapper.$(byText(city)).shouldBe(visible);
+        executeJavaScript("arguments[0].click();", cityDropdown);
+
+        SelenideElement option = stateCityWrapper.$(byText(city))
+                .shouldBe(visible);
         executeJavaScript("arguments[0].click();", option);
     }
 }

@@ -34,7 +34,7 @@ public class ResultsModal {
     }
 
     public void close() {
-        JsUtils.removeAds(); // на всякий случай чистим баннеры
+        JsUtils.removeAds();
         closeButton.scrollIntoView(true);
         executeJavaScript("arguments[0].click();", closeButton);
         modal.shouldNot(appear, Duration.ofSeconds(5));
