@@ -6,9 +6,7 @@ import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import util.JsUtils;
 
 import java.util.Map;
 
@@ -51,11 +49,6 @@ public class TestBase {
         }
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-    }
-
-    @BeforeEach
-    void removeAdsFromPage() {
-        JsUtils.removeAds();
     }
 
     @AfterEach
