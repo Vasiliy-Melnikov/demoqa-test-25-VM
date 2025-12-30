@@ -5,6 +5,7 @@ import static com.codeborne.selenide.Selenide.executeJavaScript;
 public class JsUtils {
 
     public static void removeAds() {
+        // старое
         executeJavaScript(
                 "document.querySelectorAll('footer, #fixedban').forEach(e => e.remove());"
         );
@@ -18,6 +19,17 @@ public class JsUtils {
                         "    iframe.remove();" +
                         "  }" +
                         "});"
+        );
+        executeJavaScript(
+                "var anchor = document.getElementById('adplus-anchor');" +
+                        "if (anchor) {" +
+                        "  var parent = anchor.parentElement;" +
+                        "  if (parent) {" +
+                        "    parent.remove();" +
+                        "  } else {" +
+                        "    anchor.remove();" +
+                        "  }" +
+                        "}"
         );
     }
 }
