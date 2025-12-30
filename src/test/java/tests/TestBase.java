@@ -20,7 +20,7 @@ public class TestBase {
 
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browser = System.getProperty("browser", "chrome");
-        Configuration.browserVersion = System.getProperty("browserVersion", "127.0");
+        Configuration.browserVersion = System.getProperty("browserVersion", "128.0");
         Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
 
         String remoteUrl = System.getProperty(
