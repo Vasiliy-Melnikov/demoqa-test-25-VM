@@ -17,6 +17,7 @@ public class TextBoxPage {
 
     public TextBoxPage openPage() {
         open("/text-box");
+        JsUtils.removeAds();
         return this;
     }
 
@@ -40,12 +41,8 @@ public class TextBoxPage {
         return this;
     }
 
-    public TextBoxPage removeAdsOnPage() {
-        JsUtils.removeAds();
-        return this;
-    }
-
     public TextBoxPage submit() {
+        JsUtils.removeAds();
         submitButton.click();
         return this;
     }

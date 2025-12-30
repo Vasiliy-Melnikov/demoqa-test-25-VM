@@ -42,12 +42,8 @@ public class PracticeFormPage {
         emailInput.setValue(value);
         return this;
     }
-
-    public PracticeFormPage removeAdsOnPage() {
-        JsUtils.removeAds();
-        return this;
-    }
     public PracticeFormPage selectGender(String genderText) {
+        JsUtils.removeAds();
         genderWrapper.$(byText(genderText)).click();
         return this;
     }
