@@ -28,11 +28,6 @@ public class PracticeFormPage {
         return this;
     }
 
-    public PracticeFormPage removeAdsOnPage() {
-        JsUtils.removeAds();
-        return this;
-    }
-
     public PracticeFormPage setFirstName(String value) {
         firstNameInput.setValue(value);
         return this;
@@ -48,6 +43,10 @@ public class PracticeFormPage {
         return this;
     }
 
+    public PracticeFormPage removeAdsOnPage() {
+        JsUtils.removeAds();
+        return this;
+    }
     public PracticeFormPage selectGender(String genderText) {
         genderWrapper.$(byText(genderText)).click();
         return this;

@@ -20,11 +20,6 @@ public class TextBoxPage {
         return this;
     }
 
-    public TextBoxPage removeAdsOnPage() {
-        JsUtils.removeAds();
-        return this;
-    }
-
     public TextBoxPage setFullName(String v) {
         fullNameInput.setValue(v);
         return this;
@@ -42,6 +37,11 @@ public class TextBoxPage {
 
     public TextBoxPage setPermanentAddress(String v) {
         permanentAddressInput.setValue(v);
+        return this;
+    }
+
+    public TextBoxPage removeAdsOnPage() {
+        JsUtils.removeAds();
         return this;
     }
 

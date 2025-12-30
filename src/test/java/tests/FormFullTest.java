@@ -15,7 +15,6 @@ public class FormFullTest extends TestBase {
     @Test
     void fillPracticeFormFull() {
         form.openPage()
-                .removeAdsOnPage()
                 .setFirstName(data.firstName)
                 .setLastName(data.lastName)
                 .setEmail(data.email)

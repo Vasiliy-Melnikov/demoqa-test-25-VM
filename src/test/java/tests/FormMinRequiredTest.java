@@ -13,7 +13,6 @@ public class FormMinRequiredTest extends TestBase {
     @Test
     void fillPracticeFormMinRequired() {
         form.openPage()
-                .removeAdsOnPage()
                 .setFirstName(data.firstName)
                 .setLastName(data.lastName)
                 .selectGender(data.gender)
