@@ -19,7 +19,6 @@ public class FormNegativeInvalidEmailTest extends TestBase {
         String invalidEmail = "not-an-email";
 
         form.openPage()
-                .removeAdsOnPage()
                 .setFirstName(data.firstName)
                 .setLastName(data.lastName)
                 .setEmail(invalidEmail)

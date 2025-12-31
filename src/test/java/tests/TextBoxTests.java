@@ -12,7 +12,6 @@ public class TextBoxTests extends TestBase {
     void fillTextBoxWithPageObject() {
 
         page.openPage()
-                .removeAdsOnPage()
                 .setFullName(data.fullName)
                 .setEmail(data.email)
                 .setCurrentAddress(data.currentAddress)
