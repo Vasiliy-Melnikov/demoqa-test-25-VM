@@ -11,7 +11,6 @@ public class FormFullTest extends TestBase {
     private final ResultsModal modal = new ResultsModal();
     private final TestData data = new TestData();
 
-    @EnabledIfSystemProperty(named = "browser", matches = "chrome")
     @Test
     void fillPracticeFormFull() {
         form.openPage()
