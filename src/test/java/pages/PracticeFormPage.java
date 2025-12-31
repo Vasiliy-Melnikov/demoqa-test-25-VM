@@ -28,11 +28,6 @@ public class PracticeFormPage {
         return this;
     }
 
-    public PracticeFormPage removeAdsOnPage() {
-        JsUtils.removeAds();
-        return this;
-    }
-
     public PracticeFormPage setFirstName(String value) {
         firstNameInput.setValue(value);
         return this;
@@ -47,8 +42,8 @@ public class PracticeFormPage {
         emailInput.setValue(value);
         return this;
     }
-
     public PracticeFormPage selectGender(String genderText) {
+        JsUtils.removeAds();
         genderWrapper.$(byText(genderText)).click();
         return this;
     }
@@ -88,20 +83,27 @@ public class PracticeFormPage {
     }
 
     public PracticeFormPage selectState(String state) {
+        $("#state").scrollIntoView(true);
+        JsUtils.removeAds();
+        executeJavaScript(
+                "var dp = document.querySelector('.react-datepicker'); if (dp) dp.remove();"
+        );
+
         stateCity.selectState(state);
         return this;
     }
-
     public PracticeFormPage selectCity(String city) {
         stateCity.selectCity(city);
         return this;
     }
 
     public void submit() {
-        submitButton.click();
+        submitButton.scrollTo();
+        executeJavaScript("arguments[0].click();", submitButton);
     }
 
     public void submitExpectingValidation() {
-        submitButton.click();
+        submitButton.scrollTo();
+        executeJavaScript("arguments[0].click();", submitButton);
     }
 }
