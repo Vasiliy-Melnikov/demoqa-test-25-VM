@@ -6,6 +6,7 @@ import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Map;
@@ -16,7 +17,7 @@ import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 public class TestBase {
 
     @BeforeAll
-    static void beforeAll() {
+    static void setupSelenideConfig() {
 
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browser = System.getProperty("browser", "chrome");
@@ -47,9 +48,16 @@ public class TestBase {
 
             Configuration.browserCapabilities = capabilities;
         }
-
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }
+
+    @BeforeEach
+    void addAllureListener() {
+        SelenideLogger.addListener("allure", new AllureSelenide()
+                .screenshots(true)
+                .savePageSource(false)
+        );
+    }
+
 
     @AfterEach
     void addAttachments() {
