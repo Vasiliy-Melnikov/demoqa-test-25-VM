@@ -17,39 +17,21 @@ import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 public class TestBase {
 
     @BeforeAll
-    static void setupSelenideConfig() {
+    static void beforeAll() {
 
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.browserVersion = System.getProperty("browserVersion", "127.0");
         Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
-        Configuration.pageLoadStrategy = "eager";
+        Configuration.remote= System.getProperty("remote");
 
-        String remoteUrl = System.getProperty(
-                "remoteDriverUrl",
-                "https://user1:1234@selenoid.autotests.cloud/wd/hub"
-        );
-
-        System.out.println("=== RUN CONFIG ===");
-        System.out.println("browser = " + Configuration.browser);
-        System.out.println("browserVersion = " + Configuration.browserVersion);
-        System.out.println("browserSize = " + Configuration.browserSize);
-        System.out.println("remote = " + remoteUrl);
-        System.out.println("==================");
-
-        if (remoteUrl != null && !remoteUrl.isEmpty()) {
-            Configuration.remote = remoteUrl;
-
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                    "enableVNC", true,
-                    "enableVideo", true
-            ));
-
-            Configuration.browserCapabilities = capabilities;
-        }
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("selenoid:options", Map.of(
+                "enableVNC", true,
+                "enableVideo", true
+        ));
+        Configuration.browserCapabilities = capabilities;
     }
-
     @BeforeEach
     void addAllureListener() {
         SelenideLogger.addListener("allure", new AllureSelenide()
@@ -57,8 +39,6 @@ public class TestBase {
                 .savePageSource(false)
         );
     }
-
-
     @AfterEach
     void addAttachments() {
         String sId = sessionId().toString();

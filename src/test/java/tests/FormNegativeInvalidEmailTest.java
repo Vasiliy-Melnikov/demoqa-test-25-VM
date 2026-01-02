@@ -1,5 +1,6 @@
 package tests;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.PracticeFormPage;
 import pages.components.ResultsModal;
@@ -14,6 +15,7 @@ public class FormNegativeInvalidEmailTest extends TestBase {
     private final TestData data = new TestData();
 
     @Test
+    @Tag("Regress")
     void fillPracticeFormNegativeInvalidEmail() {
 
         String invalidEmail = "not-an-email";

@@ -1,5 +1,6 @@
 package tests;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.PracticeFormPage;
 import pages.components.ResultsModal;
@@ -11,6 +12,7 @@ public class FormMinRequiredTest extends TestBase {
     private final TestData data = new TestData();
 
     @Test
+    @Tag("Regress")
     void fillPracticeFormMinRequired() {
         form.openPage()
                 .setFirstName(data.firstName)

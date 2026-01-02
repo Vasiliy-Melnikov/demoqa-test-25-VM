@@ -1,5 +1,6 @@
 package tests;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.TextBoxPage;
 
@@ -9,6 +10,7 @@ public class TextBoxTests extends TestBase {
     private final TestData data = new TestData();
 
     @Test
+    @Tag("Smoke")
     void fillTextBoxWithPageObject() {
 
         page.openPage()
