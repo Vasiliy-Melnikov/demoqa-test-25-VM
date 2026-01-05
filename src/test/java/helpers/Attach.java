@@ -8,12 +8,10 @@ import org.openqa.selenium.TakesScreenshot;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.openqa.selenium.logging.LogType.BROWSER;
 
 public class Attach {
-
     @Attachment(value = "{attachName}", type = "image/png")
     public static byte[] screenshotAs(String attachName) {
         return ((TakesScreenshot) getWebDriver()).getScreenshotAs(OutputType.BYTES);
@@ -30,12 +28,19 @@ public class Attach {
     }
 
     public static void browserConsoleLogs() {
-        attachAsText(
-                "Browser console logs",
-                String.join("\n", Selenide.getWebDriverLogs(BROWSER))
-        );
+        try {
+            attachAsText(
+                    "Browser console logs",
+                    String.join("\n", Selenide.getWebDriverLogs(BROWSER))
+            );
+        } catch (Exception e) {
+            attachAsText(
+                    "Browser console logs",
+                    "Browser console logs are not available for this browser: "
+                            + e.getClass().getSimpleName()
+            );
+        }
     }
-
     @Attachment(value = "Video", type = "text/html", fileExtension = ".html")
     public static String addVideo(String sessionId) {
         return "<html><body><video width='100%' height='100%' controls autoplay><source src='"
@@ -49,7 +54,7 @@ public class Attach {
             return new URL(videoUrl);
         } catch (MalformedURLException e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
 }

@@ -31,21 +31,40 @@ dependencies {
             "io.qameta.allure:allure-junit5:2.27.0",
             "org.assertj:assertj-core:3.25.3",
             "org.junit.jupiter:junit-jupiter:5.10.2",
-            "com.github.javafaker:javafaker:1.0.2"
+            "com.github.javafaker:javafaker:1.0.2",
+            "org.aeonbits.owner:owner:1.0.12"
     )
 }
 
 tasks.withType(Test) {
+    systemProperties(System.getProperties())
+
     useJUnitPlatform()
 
     testLogging {
         lifecycle {
-            events "started", "skipped", "failed", "standard_error", "standard_out"
-            exceptionFormat "short"
+            events "passed", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "full"
         }
     }
 }
-test {
-    useJUnitPlatform()
-    systemProperty("file.encoding", "UTF-8")
+
+tasks.register('Smoke', Test) {
+    testLogging {
+        events "passed", "skipped", "failed", "standard_out", "standard_error"
+        exceptionFormat "short"
+    }
+    useJUnitPlatform {
+        includeTags("Smoke")
+    }
+}
+
+tasks.register('Regress', Test) {
+    testLogging {
+        events "passed", "skipped", "failed", "standard_out", "standard_error"
+        exceptionFormat "short"
+    }
+    useJUnitPlatform {
+        includeTags("Regress")
+    }
 }

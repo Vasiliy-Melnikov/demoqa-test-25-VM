@@ -1,5 +1,6 @@
 package tests;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
 import pages.PracticeFormPage;
@@ -11,7 +12,9 @@ public class FormFullTest extends TestBase {
     private final ResultsModal modal = new ResultsModal();
     private final TestData data = new TestData();
 
+    @EnabledIfSystemProperty(named = "browser", matches = "chrome")
     @Test
+    @Tag("Smoke")
     void fillPracticeFormFull() {
         form.openPage()
                 .setFirstName(data.firstName)

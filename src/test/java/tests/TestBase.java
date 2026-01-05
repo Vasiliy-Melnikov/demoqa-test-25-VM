@@ -17,21 +17,21 @@ import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 public class TestBase {
 
     @BeforeAll
-    static void setupSelenideConfig() {
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "1920x1080";
-        Configuration.pageLoadStrategy = "eager";
+    static void beforeAll() {
 
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        Configuration.baseUrl = "https://demoqa.com";
+        Configuration.browser = System.getProperty("browser", "chrome");
+        Configuration.browserVersion = System.getProperty("browserVersion", "127.0");
+        Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
+        Configuration.remote= System.getProperty("remote");
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+        capabilities.setCapability("selenoid:options", Map.of(
                 "enableVNC", true,
                 "enableVideo", true
         ));
         Configuration.browserCapabilities = capabilities;
     }
-
     @BeforeEach
     void addAllureListener() {
         SelenideLogger.addListener("allure", new AllureSelenide()
@@ -39,17 +39,13 @@ public class TestBase {
                 .savePageSource(false)
         );
     }
-
     @AfterEach
     void addAttachments() {
         String sId = sessionId().toString();
-
         Attach.screenshotAs("Last screenshot");
         Attach.pageSource();
         Attach.browserConsoleLogs();
         closeWebDriver();
         Attach.addVideo(sId);
-
-        SelenideLogger.removeListener("allure");
     }
 }

@@ -1,13 +1,14 @@
 package pages.components;
 
-
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import util.JsUtils;
+
+import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.*;
 
 public class ResultsModal {
 
@@ -16,12 +17,12 @@ public class ResultsModal {
     private final ElementsCollection resultRows = $$(".table-responsive tbody tr");
 
     public ResultsModal shouldAppear() {
-        modal.should(appear);
+        modal.should(appear, Duration.ofSeconds(10));
         return this;
     }
 
     public ResultsModal shouldNotAppear() {
-        modal.shouldNot(appear);
+        modal.shouldNot(appear, Duration.ofSeconds(5));
         return this;
     }
 
@@ -33,7 +34,9 @@ public class ResultsModal {
     }
 
     public void close() {
-        closeButton.click();
-        modal.shouldNot(appear);
+        JsUtils.removeAds();
+        closeButton.scrollIntoView(true);
+        executeJavaScript("arguments[0].click();", closeButton);
+        modal.shouldNot(appear, Duration.ofSeconds(5));
     }
 }
